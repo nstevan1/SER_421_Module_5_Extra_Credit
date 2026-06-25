@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliza - Server Side</title>
+</head>
+<body>
+<h1>🧠 Eliza - Server-Side Therapist</h1>
+
+<div th:if="${name == null}">
+    <h2>Welcome! Please tell me your name:</h2>
+    <form method="post" action="/start">
+        <input type="text" name="name" required placeholder="Your name" />
+        <button type="submit">Start Session</button>
+    </form>
+</div>
+
+<div th:if="${name != null}">
+    <h2>Hello, <span th:text="${name}"></span>!</h2>
+
+    <div th:each="line : ${conversation}">
+        <p th:text="${line}"></p>
+    </div>
+
+    <form method="post" action="/talk">
+        <input type="text" name="message" placeholder="Type here... (/clear to reset)" required style="width:70%" />
+        <button type="submit">Send</button>
+    </form>
+</div>
+</body>
+</html>
